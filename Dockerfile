@@ -1,7 +1,9 @@
 FROM golang:latest 
-RUN mkdir /app 
+RUN mkdir /app
+WORKDIR /app
+ADD go.mod go.sum /app/
+RUN go mod download
 ADD . /app/ 
-WORKDIR /app 
 RUN go build -o main . 
 CMD ["/app/main"]
 EXPOSE 8000
